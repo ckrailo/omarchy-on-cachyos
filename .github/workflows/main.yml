@@ -1,0 +1,22 @@
+name: Test the Installer
+
+on:
+  push:
+    branches: [ main, develop, gh_actions ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  omarchy-installer-job:
+    runs-on: ubuntu-latest
+    container:
+      image: cachyos/cachyos:latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v5
+    - name: Make installer executable
+      run: chmod +x bin/install-omarchy-on-cachyos.sh
+    - name: Run Installer
+      run: ./bin/install-omarchy-on-cachyos.sh
+
